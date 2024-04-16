@@ -35,4 +35,61 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->
 ## Logo
-``` Want Logo if ```
+```
+Want Logo if not then create it 
+```
+
+## Navbar
+``` 
+What things are requred in Navbar 
+```
+## Login Method
+```
+If Only email then ask if otp is required if required? then 50 logo ka free hai and aage ki billing lgegi
+```
+## pictures
+```
+pictures for layour
+```
+## carousel
+```
+carousel puchna hai
+```
+## layout
+```
+layout puchna hai home ka 
+```
+## item ki details
+```
+items ki details puchni hai
+```
+## payment 
+``` 
+online payment ke paise lgenge
+```
+## home delivery
+``` 
+home delivery daalni hai ya nhi
+```
+## domain name
+```
+ iske with hosting paise lgenge of months
+```
+## navbar
+```
+Trekking pants
+Track suits
+Track pants
+Down jackets
+Tights
+```
+## Domain name
+```
+Trekitclothing
+```
+##
+```
+made from 100% recyclable products
+free shipping 
+exciting offers
+```
