@@ -10,15 +10,18 @@ export const metadata = {
   icons:{
     icon:"/favicon.ico"
   }
+  
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <div className="outer w-100% h-100%">
         <Navbar/>
         {children}
         <Footer/>
+        </div>
       </body>
     </html>
   );
