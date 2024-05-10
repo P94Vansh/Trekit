@@ -15,6 +15,7 @@ module.exports = {
       colors:{
         "brown":"rgba(31,26,23,1.00)",
         "brown-light":"rgba(31,26,23,0.9)",
+        "brown-light-light":"rgba(31,26,23,0.1)",
         
       }
     },
