@@ -11,11 +11,28 @@ const Footer = () => {
      <Link href="/">
       <Image className='m-auto' src="/Trekitbg.png" width={140} height={140} alt="Loading image"/>
       </Link>
-      <p className="mt-2 m-auto text-center font-semibold text-gray-500">Style With Sustainability</p>
+      <p className="mt-2 m-auto text-center font-semibold text-gray-500">Style With Sustainability- Where Fashion Meets Sustainability</p>
     </div>
     <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
       <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">SHOP</h2>
+        <nav className="list-none mb-10">
+          <li>
+            <Link href={'/TrekkingPants'} className="text-gray-600 hover:text-gray-800">Trekking Pants</Link>
+          </li>
+          <li>
+            <Link href={'/TrackSuits'} className="text-gray-600 hover:text-gray-800">Track Suits</Link>
+          </li>
+          <li>
+            <Link href={'/TrackPants'} className="text-gray-600 hover:text-gray-800">Track Pants</Link>
+          </li>
+          <li>
+            <Link href={'/DownJackets'} className="text-gray-600 hover:text-gray-800">Down Jackets</Link>
+          </li>
+        </nav>
+      </div>
+      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">POLICY</h2>
         <nav className="list-none mb-10">
           <li>
             <a className="text-gray-600 hover:text-gray-800">First Link</a>
@@ -32,24 +49,7 @@ const Footer = () => {
         </nav>
       </div>
       <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav className="list-none mb-10">
-          <li>
-            <a className="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
-      </div>
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">ABOUT</h2>
         <nav className="list-none mb-10">
           <li>
             <a className="text-gray-600 hover:text-gray-800">First Link</a>

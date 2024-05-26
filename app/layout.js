@@ -3,6 +3,7 @@ import React from "react";
 import { Inter } from "next/font/google";
 import { useEffect,useState } from "react";
 import "./globals.css";
+import { useRouter } from 'next/navigation'
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 const inter = Inter({ subsets: ["latin"] });
@@ -14,6 +15,7 @@ export const useAppContext = () => useContext(AppContext)
 
 
 export default function RootLayout({ children}) {
+  const router = useRouter()
   const [Cart, setCart] = useState({})
       const [subTotal, setsubTotal] = useState(0)
       useEffect(() => {
@@ -64,12 +66,20 @@ export default function RootLayout({ children}) {
         setCart({})
         saveCarttols({})
       }
+
+      const buyNow=(itemCode,qty,price,name,size,variant)=>{
+        let newcart={itemCode:{qty:1,price,name,size,variant}}
+        setCart(newcart)
+        saveCarttols(newcart)
+        router.push('/Checkout')
+      }
       const contextValues = {
         Cart,
         subTotal,
         addtoCart,
         removeFromCart,
         clearCart,
+        buyNow
       };
   return (
     <AppContext.Provider value={contextValues}>

@@ -48,14 +48,14 @@ const Navbar = ({Cart,addtoCart,removeFromCart,clearCart,subTotal}) => {
         <MdAccountCircle/></Link>
         <IoCartOutline onClick={toggleCart}  />
         </div>
-        <div ref={ref} className={`sideCart border-brown border-2 absolute top-0 right-0 bg-white py-10 px-8 w-72 h-[100vh] transition-transform ${Object.keys(Cart).length!==0?'translate-x-0':'translate-x-full'}`}>
+        <div ref={ref} className={`sideCart overflow-y-scroll border-brown border-2 absolute top-0 right-0 bg-white py-10 px-8 w-72 h-[100vh] transition-transform ${Object.keys(Cart).length!==0?'translate-x-0':'translate-x-full'}`}>
           <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
           <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl text-brown"><AiFillCloseCircle /></span>
           <ol className='list-decimal'>
             {Object.keys(Cart).length==0 && <div className='my-4 text-base font-semibold'>Your Cart is Empty...</div>}
             {Object.keys(Cart).filter((k) => Cart[k].qty > 0).map((k)=>{ return <li key={k}>
               <div className="item flex my-5">
-                <div className='w-2/3 font-semibold'>{Cart[k].name}</div>
+                <div className='w-2/3 font-semibold'>{Cart[k].name}({Cart[k].size}/{Cart[k].variant})</div>
                 <div className='w-1/3 flex items-center font-semibold text-lg justify-center'><AiFillMinusCircle onClick={()=>{removeFromCart(k,1,Cart[k].price,Cart[k].name,Cart[k].size,Cart[k].variant)}} className='cursor-pointer text-brown'/> <span className='mx-2 text-sm'>{Cart[k].qty}</span><AiFillPlusCircle onClick={()=>{addtoCart(k,1,Cart[k].price,Cart[k].name,Cart[k].size,Cart[k].variant)}}  className='cursor-pointer text-brown'/></div>
               </div>
             </li>
@@ -65,7 +65,7 @@ const Navbar = ({Cart,addtoCart,removeFromCart,clearCart,subTotal}) => {
           <div className="flex justify-center items-center gap-2">
 
           <Link href={"/Checkout"}> <button className="flex items-center mt-5 text-white bg-brown-light border</Link>-0 py-2 px-2 focus:outline-none hover:bg-brown rounded text-sm"><IoBagCheck className='m-1'/> <span>Checkout </span> </button></Link>
-          <button className="flex mt-5 text-white bg-brown-light border-0 py-2 px-4 text-md focus:outline-none hover:bg-brown rounded text-sm" onClick={clearCart}>Clear Cart</button>
+          <button className="flex mt-5 text-white bg-brown-light border-0 py-2 px-3 text-md focus:outline-none hover:bg-brown rounded text-sm" onClick={clearCart}>Clear Cart</button>
           </div>
         </div>
       </nav>

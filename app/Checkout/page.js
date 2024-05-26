@@ -73,7 +73,7 @@ const Page = () => {
             {Object.keys(Cart).length==0 && <div className='my-4 text-base font-semibold'>Your Cart is Empty...</div>}
             {Object.keys(Cart).filter((k) => Cart[k].qty > 0).map((k)=>{ return <li key={k}>
               <div className="item flex my-5">
-                <div className=' font-semibold'>{Cart[k].name}</div>
+                <div className=' font-semibold'>{Cart[k].name}({Cart[k].size}/{Cart[k].variant})</div>
                 <div className='w-1/3 flex items-center font-semibold text-lg justify-center'><AiFillMinusCircle onClick={()=>{removeFromCart(k,1,Cart[k].price,Cart[k].name,Cart[k].size,Cart[k].variant)}} className='cursor-pointer text-brown'/> <span className='mx-2 text-sm'>{Cart[k].qty}</span><AiFillPlusCircle onClick={()=>{addtoCart(k,1,Cart[k].price,Cart[k].name,Cart[k].size,Cart[k].variant)}}  className='cursor-pointer text-brown'/></div>
               </div>
             </li>
