@@ -1,48 +1,74 @@
+'use client'
 import React from 'react'
-
-const page = () => {
+import Order from '../models/Order'
+import mongoose from "mongoose";
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+const Page = () => {
+  const router=useRouter()
+  useEffect(() => {
+    if(!localStorage.getItem('token'))
+        router.push('/')
+  
+  }, [])
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="lg:w-4/5 mx-auto flex flex-wrap">
-      <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-        <h2 className="text-sm title-font text-gray-500 tracking-widest">Trekit</h2>
-        <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">Order Id:#89777</h1>
-        <p className="leading-relaxed mb-4">Your Order has been Successfully Placed</p>
-        <div className="flex mb-4">
-          <a className="flex-grow  text-center py-2 text-lg px-1">Item Description</a>
-          <a className="flex-grow text-center border-gray-300 py-2 text-lg px-1">Quantity</a>
-          <a className="flex-grow text-center border-gray-300 py-2 text-lg px-1">Item Total</a>
-        </div>
-        
-        <div className="flex border-t border-gray-200 py-2">
-          <span className="text-gray-500">Style with Sustainability (XL/BLACK)</span>
-          <span className="ml-auto text-gray-900">1</span>
-          <span className="ml-auto text-gray-900">₹499</span>
-        </div>
-        <div className="flex border-t border-gray-200 py-2">
-          <span className="text-gray-500">Style with Sustainability (XL/BLACK)</span>
-          <span className="ml-auto text-gray-900">1</span>
-          <span className="ml-auto text-gray-900">₹499</span>
-        </div>
-        <div className="flex border-t border-b mb-6 border-gray-200 py-2">
-          <span className="text-gray-500">Style with Sustainability (XL/BLACK)</span>
-          <span className="ml-auto text-gray-900">1</span>
-          <span className="ml-auto text-gray-900">₹499</span>
-        </div>
-        <div className="flex flex-col">
-          
-          <span className="title-font font-medium text-2xl text-gray-900">Subtotal: ₹1158.00</span>
-          <div className='my-6'>
-          <button className="flex mx-0 text-white bg-brown border-0 py-2 px-6 focus:outline-none hover:bg-brown rounded">Track Order</button>
-          </div>
-        </div>
+  <div>
+    <h1 className="font-semibold text-2xl text-center p-8">My Orders</h1>
+    <div className="container  mx-auto"></div>
+    <div className="flex flex-col">
+  <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div className="overflow-hidden">
+        <table
+          className="min-w-full text-left text-sm font-light text-surface dark:text-white">
+          <thead
+            className="border-b border-neutral-200 font-medium dark:border-white/10">
+            <tr>
+              <th scope="col" className="px-6 py-4">#</th>
+              <th scope="col" className="px-6 py-4">First</th>
+              <th scope="col" className="px-6 py-4">Last</th>
+              <th scope="col" className="px-6 py-4">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+              <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
+              <td className="whitespace-nowrap px-6 py-4">Mark</td>
+              <td className="whitespace-nowrap px-6 py-4">Otto</td>
+              <td className="whitespace-nowrap px-6 py-4">@mdo</td>
+            </tr>
+            <tr
+              className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+              <td className="whitespace-nowrap px-6 py-4 font-medium">2</td>
+              <td className="whitespace-nowrap px-6 py-4">Jacob</td>
+              <td className="whitespace-nowrap px-6 py-4">Thornton</td>
+              <td className="whitespace-nowrap px-6 py-4">@fat</td>
+            </tr>
+            <tr
+              className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+              <td className="whitespace-nowrap px-6 py-4 font-medium">3</td>
+              <td className="whitespace-nowrap px-6 py-4">Larry</td>
+              <td className="whitespace-nowrap px-6 py-4">Wild</td>
+              <td className="whitespace-nowrap px-6 py-4">@twitter</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400"/>
     </div>
   </div>
-</section>
+</div>
+  </div>
   )
 }
+async function getData(params) {
+  if(!mongoose.connections[0].readyState){
+    await mongoose.connect(process.env.MONGO_URI)
+  }
+  let orders= await Order.find({})
 
-export default page
+  return {orders: JSON.parse(JSON.stringify(orders))}
+  }
+  
+
+export default Page

@@ -10,9 +10,10 @@ import { AiFillCloseCircle,AiFillPlusCircle,AiFillMinusCircle } from "react-icon
 import { IoBagCheck } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 
-const Navbar = ({Cart,addtoCart,removeFromCart,clearCart,subTotal}) => {
+const Navbar = ({logout,user,Cart,addtoCart,removeFromCart,clearCart,subTotal}) => {
+  const [dropDown, setDropDown] = useState(false)
   const [isopen, setisopen] = useState(false)
-  const ref = useRef()
+  const ref = useRef()                                                  
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
       ref.current.classList.remove('translate-x-full')
@@ -43,11 +44,20 @@ const Navbar = ({Cart,addtoCart,removeFromCart,clearCart,subTotal}) => {
           <Link href="/DownJackets" > <li className='my-4 underline-offset-[10px] hover:underline decoration-white'>Down Jackets</li></Link>
           <Link href="/Tights" > <li className='my-4 underline-offset-[10px] hover:underline decoration-white'>Tights</li></Link>
         </ul>
-        <div className='text-3xl text-white font-bold mx-5 cursor-pointer absolute top-8 right-4 md:top-5 flex gap-2 md:py-1'>
-          <Link href={"/Login"}>
-        <MdAccountCircle/></Link>
+        <div  className='text-3xl text-white font-bold mx-5 cursor-pointer absolute top-8 right-4 md:top-5 flex gap-2 md:py-1'>
+         
+        {dropDown && <div onMouseOver={()=>{setDropDown(true)}} onMouseLeave={()=>{setDropDown(false)}} className="absolute right-5 w-40 text-sm top-8 rounded-md px-5 shadow-lg border  bg-white text-brown">
+            <ul className='flex items-center flex-col'>
+              <Link href={'/myaccount'}>  <li className='py-1 font-bold hover:text-brown-light text-sm'>My Account</li></Link>
+              <Link href={'/order'}>  <li className='py-1 font-bold hover:text-brown-light text-sm'>Orders</li></Link>
+              <li onClick={logout} className='py-1 font-bold hover:text-brown-light text-sm'>Logout</li>
+            </ul>
+          </div>}
+          {user.value && <MdAccountCircle onMouseOver={()=>{setDropDown(true)}} onMouseLeave={()=>{setDropDown(false)}}/>}
+          {!user.value&&<Link href={"/Login"} className='-mt-2'> <button className='bg-brown px-2 py-1 text-sm '>LogIn</button> </Link>}
         <IoCartOutline onClick={toggleCart}  />
         </div>
+         
         <div ref={ref} className={`sideCart overflow-y-scroll border-brown border-2 absolute top-0 right-0 bg-white py-10 px-8 w-72 h-[100vh] transition-transform ${Object.keys(Cart).length!==0?'translate-x-0':'translate-x-full'}`}>
           <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
           <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl text-brown"><AiFillCloseCircle /></span>

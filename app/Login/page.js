@@ -1,8 +1,98 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { Bounce } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
-const page = () => {
+const Page = () => {
+  const router=useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+      router.push('/')
+    }
+  }, [])
+  
+  const handleChange=(e)=>{
+     if(e.target.name=='email'){
+      setEmail(e.target.value)
+    }
+    else if(e.target.name=='password'){
+      setPassword(e.target.value)
+    }
+  }
+  const handleSubmit=async(e)=>{
+    try{
+    e.preventDefault()
+    const data={email,password}
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      
+      if(result.responseData.message==="You are Now Logged In"){
+        localStorage.setItem('token',result.token)
+        toast.success('You are Successfully Logged In!', {
+          position: "top-left",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setTimeout(() => {
+          
+          router.push("http://localhost:3000/")
+        }, 1000);
+      }
+      else{
+        toast.error('Please Enter valid Credentials!', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+      setEmail("")
+      setPassword("")
+      console.log(result)
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
   return (
+    <>
+    <ToastContainer
+position="top-left"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -20,16 +110,17 @@ const page = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form onSubmit={handleSubmit} className="space-y-6" method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
               <div className="mt-2">
-                <input
+                <input onChange={handleChange}
                   id="email"
                   name="email"
                   type="email"
+                  value={email}
                   autoComplete="email"
                   placeholder='Email'
                   required
@@ -50,10 +141,11 @@ const page = () => {
                 </div>
               </div>
               <div className="mt-2">
-                <input
+                <input onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
                   autoComplete="current-password"
                   placeholder='Password'
                   required
@@ -75,7 +167,8 @@ const page = () => {
           
         </div>
       </div>
+      </>
   )
 }
 
-export default page
+export default Page

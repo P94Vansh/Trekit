@@ -14,7 +14,7 @@ if(!mongoose.connections[0].readyState){
   await mongoose.connect(process.env.MONGO_URI)
 }
 let product= await Product.findOne({slug:params})
-let variants=await Product.find({title:product.title})
+let variants=await Product.find({title:product.title, category:product.category})
 let colorSizeSlug={}
 for (let item of variants){
   if(Object.keys(colorSizeSlug).includes(item.color)){
